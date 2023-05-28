@@ -389,7 +389,7 @@
     <value>8</value>
   </data>
   <data name="dot.Text" xml:space="preserve">
-    <value>,</value>
+    <value>.</value>
   </data>
   <data name="&gt;&gt;dot.Name" xml:space="preserve">
     <value>dot</value>

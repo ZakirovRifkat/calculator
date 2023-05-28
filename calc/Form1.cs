@@ -9,7 +9,7 @@ namespace calc
         public Form1()
         {
             InitializeComponent();
-            CheckTextBoxAsync();
+            сheckTextBoxAsync();
         }
 
         private void one_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace calc
         private void dot_Click(object sender, EventArgs e)
         {
             checkClickSolution();
-            input.Text += ",";
+            input.Text += ".";
         }
 
         private void plus_Click(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace calc
             {
                 input.Text = input.Text.Remove(input.Text.Length - 1);
             }
-            else 
+            else
             {
                 input.Text = "";
             }
@@ -89,6 +89,7 @@ namespace calc
             try
             {
                 solution = Convert.ToString(dt.Compute(expression, ""));
+
             }
             catch (Exception exeption)
             {
@@ -98,10 +99,10 @@ namespace calc
                     MessageBoxIcon.Warning
                     );
             }
-            input.Text = solution;
+            input.Text = decimalToBinary(solution);
         }
 
-        private async Task CheckTextBoxAsync()
+        private async Task сheckTextBoxAsync()
         {
             while (true)
             {
@@ -125,6 +126,34 @@ namespace calc
                 isClickSolution = false;
                 input.Text = "";
             }
+        }
+
+        private string decimalToBinary(string num)
+        {
+            double number = Convert.ToDouble(num); // преобразуем строку в число
+            int integerPart = (int)number;
+            double fractionalPart = number - integerPart;
+
+            // переводим дробную часть в двоичную
+            string binaryIntegerPart = Convert.ToString(integerPart, 2);
+            Console.WriteLine($"Целая часть в двоичной системе: {binaryIntegerPart}");
+
+            // переводим дробную часть в двоичную систему
+            double currentFraction = fractionalPart;
+            string binaryFractionalPart = "";
+            for (int i = 0; i < 5; i++)
+            {
+                currentFraction *= 2;
+                int bit = (int)currentFraction;
+                binaryFractionalPart += bit.ToString();
+                currentFraction -= bit;
+            }
+            Console.WriteLine($"Дробная часть в двоичной системе: {binaryFractionalPart}");
+
+            // объединяем двоичную целую и дробную части
+            string binaryNumber = binaryIntegerPart + "." + binaryFractionalPart;
+            Console.WriteLine($"Результат в двоичной системе: {binaryNumber}");
+            return binaryNumber;
         }
     }
 
