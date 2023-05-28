@@ -12,40 +12,10 @@ namespace calc
             CheckTextBoxAsync();
         }
 
-        private async Task CheckTextBoxAsync()
-        {
-            while (true)
-            {
-                await Task.Delay(3000); // Приостанавливаем выполнение на 1 секунду
-                if (input.Text[input.Text.Length - 1] == '(')
-                {
-                    if (input.Text[input.Text.Length - 2] == '1' || input.Text[input.Text.Length - 2] == '0')
-                    {
-                        //MessageBox.Show("Вы идиот!",
-                        //"Предупреждение",
-                        //MessageBoxButtons.OK,
-                        //MessageBoxIcon.Warning);
-                        //input.Text = input.Text.Remove(input.Text.Length - 1);
-                    }
-                }
-            }
-        }
-
-        private void checkClickSolution() 
-        {
-            if (isClickSolution == true)
-            {
-                isClickSolution = false;
-                input.Text = "";
-            }
-        }
-
         private void one_Click(object sender, EventArgs e)
         {
-
             checkClickSolution();
             input.Text += "1";
-
         }
 
         private void zero_Click(object sender, EventArgs e)
@@ -84,28 +54,6 @@ namespace calc
             input.Text += "/";
         }
 
-        private void solution_Click(object sender, EventArgs e)
-        {
-            isClickSolution = true;
-            string expression = input.Text.ToString();
-            string solution = "";
-            DataTable dt = new DataTable();
-            try
-            {
-                solution = Convert.ToString(dt.Compute(expression, ""));
-            }
-            catch (Exception exeption) 
-            {
-                MessageBox.Show(exeption.Message, 
-                    "Предупреждение", 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Warning
-                    );
-            }
-            input.Text = solution;
-        }
-
-
         private void allClear_Click(object sender, EventArgs e)
         {
             input.Text = "";
@@ -113,7 +61,14 @@ namespace calc
 
         private void clear_Click(object sender, EventArgs e)
         {
-            input.Text = input.Text.Remove(input.Text.Length - 1);
+            if (!isClickSolution)
+            {
+                input.Text = input.Text.Remove(input.Text.Length - 1);
+            }
+            else 
+            {
+                input.Text = "";
+            }
         }
 
         private void leftBracket_Click(object sender, EventArgs e)
@@ -124,6 +79,52 @@ namespace calc
         private void rightBracket_Click(object sender, EventArgs e)
         {
             input.Text += ")";
+        }
+        private void solution_Click(object sender, EventArgs e)
+        {
+            isClickSolution = true;
+            string expression = input.Text.ToString();
+            string solution = "";
+            DataTable dt = new DataTable();
+            try
+            {
+                solution = Convert.ToString(dt.Compute(expression, ""));
+            }
+            catch (Exception exeption)
+            {
+                MessageBox.Show(exeption.Message,
+                    "Предупреждение",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                    );
+            }
+            input.Text = solution;
+        }
+
+        private async Task CheckTextBoxAsync()
+        {
+            while (true)
+            {
+                await Task.Delay(3000);
+                if (false)
+                {
+                    //MessageBox.Show("Вы идиот!",
+                    //"Предупреждение",
+                    //MessageBoxButtons.OK,
+                    //MessageBoxIcon.Warning
+                    //);
+                    //input.Text = input.Text.Remove(input.Text.Length - 1);
+                }
+            }
+        }
+
+        private void checkClickSolution()
+        {
+            if (isClickSolution == true)
+            {
+                isClickSolution = false;
+                input.Text = "";
+            }
         }
     }
 
