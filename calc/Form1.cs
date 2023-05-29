@@ -81,6 +81,7 @@ namespace calc
         {
             input.Text += ")";
         }
+
         private void solution_Click(object sender, EventArgs e)
         {
             isClickSolution = true;
@@ -104,7 +105,15 @@ namespace calc
             try
             {
                 decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
-                
+                if (decimalSolution == "не число" || decimalSolution == "∞")
+                {
+                    //decimalSolution = "😊";
+                    input.Text = decimalSolution;
+                }else 
+                {
+                    
+                    input.Text = decimalToBinary(decimalSolution);
+                }
             }
             catch (Exception exeption)
             {
@@ -114,7 +123,7 @@ namespace calc
                     MessageBoxIcon.Warning
                     );
             }
-            input.Text = decimalSolution;
+            
         }
 
         private async Task сheckTextBoxAsync()
