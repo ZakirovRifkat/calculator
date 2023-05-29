@@ -85,21 +85,26 @@ namespace calc
         {
             isClickSolution = true;
             string binaryExpression = input.Text;
-            string decimalExpression = "";
-            string decimalSolution = "";
             char[] symbols = { '+', '-', '*', '/', '(', ')' };
-            string[] binaryNumbers = binaryExpression.Split(symbols);
-            string[] decimalNumbers = Array.Empty<string>();
-            for(int i = 0; i < binaryNumbers.Length - 1; i++) 
+            string[] numbers = binaryExpression.Split(symbols);
+            numbers = numbers.Where(x => x != "").ToArray();
+            string[] decimalNumbers = new string[numbers.Length];
+            string decimalSolution = "";
+            input.Text = "";
+            for (int i = 0; i < numbers.Length; i++) 
             {
-                decimalNumbers[i] = BinaryToDecimal(binaryNumbers[i]);
-                decimalExpression = binaryExpression.Replace(binaryNumbers[i], decimalNumbers[i]);
+                decimalNumbers[i] = BinaryToDecimal(numbers[i]);
             }
 
+            string decimalExpression = rebuildExpression(binaryExpression, decimalNumbers);
+            
+            decimalExpression = decimalExpression.Replace(',', '.');
+            input.Text = decimalExpression;
             DataTable dt = new DataTable();
             try
             {
                 decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
+                
             }
             catch (Exception exeption)
             {
@@ -109,7 +114,7 @@ namespace calc
                     MessageBoxIcon.Warning
                     );
             }
-            input.Text = decimalToBinary(decimalSolution);
+            input.Text = decimalSolution;
         }
 
         private async Task сheckTextBoxAsync()
@@ -187,6 +192,48 @@ namespace calc
             }
             string binaryNumber = binaryIntegerPart + "." + binaryFractionalPart;
             return binaryNumber;
+        }
+
+        public static string rebuildExpression(string binaryExpression, string[] decimalNumbers)
+        {
+            Console.WriteLine(binaryExpression);
+            string decimalExpression = binaryExpression;
+            binaryExpression = binaryExpression + '_';
+            int k = 0;
+            int startIndex = 0;
+            int endIndex = 0;
+            int j = 0;
+            for (int i = 0; i < binaryExpression.Length;)
+            {
+                if (binaryExpression[i] == '1' || binaryExpression[i] == '0')
+                {
+                    k = 0;
+                    startIndex = i;
+                    Console.WriteLine($"start index = {startIndex}");
+                    while (
+                        binaryExpression[startIndex + k] == '0' ||
+                        binaryExpression[startIndex + k] == '1' ||
+                        binaryExpression[startIndex + k] == '.'
+                        )
+                    {
+                        k++;
+                    }
+                    endIndex = startIndex + k;
+                    Console.WriteLine($"end index = {endIndex}");
+                    binaryExpression = binaryExpression.Substring(0, startIndex) + decimalNumbers[j] + binaryExpression.Substring(endIndex);
+                    i = i + decimalNumbers[j].Length - 1;
+                    j++;
+                    Console.WriteLine($"expression = {binaryExpression}");
+
+
+                }
+                i++;
+                Console.WriteLine("i in end = {0}", i);
+                Console.WriteLine("");
+            }
+            binaryExpression = binaryExpression.TrimEnd('_');
+            Console.WriteLine($"final expression = {binaryExpression}");
+            return binaryExpression;
         }
     }
 }
