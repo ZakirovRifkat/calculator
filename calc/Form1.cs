@@ -1,4 +1,5 @@
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace calc
 {
@@ -83,13 +84,22 @@ namespace calc
         private void solution_Click(object sender, EventArgs e)
         {
             isClickSolution = true;
-            string expression = input.Text.ToString();
-            string solution = "";
+            string binaryExpression = input.Text;
+            string decimalExpression = "";
+            string decimalSolution = "";
+            char[] symbols = { '+', '-', '*', '/', '(', ')' };
+            string[] binaryNumbers = binaryExpression.Split(symbols);
+            string[] decimalNumbers = Array.Empty<string>();
+            for(int i = 0; i < binaryNumbers.Length - 1; i++) 
+            {
+                decimalNumbers[i] = BinaryToDecimal(binaryNumbers[i]);
+                decimalExpression = binaryExpression.Replace(binaryNumbers[i], decimalNumbers[i]);
+            }
+
             DataTable dt = new DataTable();
             try
             {
-                solution = Convert.ToString(dt.Compute(expression, ""));
-
+                decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
             }
             catch (Exception exeption)
             {
@@ -99,7 +109,7 @@ namespace calc
                     MessageBoxIcon.Warning
                     );
             }
-            input.Text = decimalToBinary(solution);
+            input.Text = decimalToBinary(decimalSolution);
         }
 
         private async Task сheckTextBoxAsync()
@@ -128,33 +138,57 @@ namespace calc
             }
         }
 
-        private string decimalToBinary(string num)
+        private string BinaryToDecimal(string binaryNumber)
         {
-            double number = Convert.ToDouble(num); // преобразуем строку в число
+            // разбиваем число на целую и дробную части
+            string[] parts = binaryNumber.Split('.');
+
+            string integerPart = parts[0];
+            string fractionalPart = "";
+            double decimalFractionalPart = 0;
+            // переводим целую часть из двоичной системы в десятичную
+            int decimalIntegerPart = Convert.ToInt32(integerPart, 2);
+            Console.WriteLine(parts[0]);
+
+
+            if (parts.Length == 2)
+            {
+                Console.WriteLine(parts[1]);
+                fractionalPart = parts[1];
+                // переводим дробную часть из двоичной системы в десятичную
+                double currentPower = -1;
+                foreach (char c in fractionalPart)
+                {
+                    int digit = Convert.ToInt32(c.ToString());
+                    decimalFractionalPart += digit * Math.Pow(2, currentPower);
+                    currentPower--;
+                }
+            }
+            // складываем целую и дробную части для получения итогового значения в десятичной системе счисления
+            double decimalNumber = decimalIntegerPart + decimalFractionalPart;
+            return decimalNumber.ToString();
+        }
+
+        private string decimalToBinary(string decimaNumber)
+        {
+            double number = Convert.ToDouble(decimaNumber);
             int integerPart = (int)number;
             double fractionalPart = number - integerPart;
 
-            // переводим дробную часть в двоичную
             string binaryIntegerPart = Convert.ToString(integerPart, 2);
-            Console.WriteLine($"Целая часть в двоичной системе: {binaryIntegerPart}");
 
-            // переводим дробную часть в двоичную систему
-            double currentFraction = fractionalPart;
             string binaryFractionalPart = "";
             for (int i = 0; i < 5; i++)
             {
-                currentFraction *= 2;
-                int bit = (int)currentFraction;
+                fractionalPart *= 2;
+                int bit = (int)fractionalPart;
                 binaryFractionalPart += bit.ToString();
-                currentFraction -= bit;
+                fractionalPart -= bit;
             }
-            Console.WriteLine($"Дробная часть в двоичной системе: {binaryFractionalPart}");
-
-            // объединяем двоичную целую и дробную части
             string binaryNumber = binaryIntegerPart + "." + binaryFractionalPart;
-            Console.WriteLine($"Результат в двоичной системе: {binaryNumber}");
             return binaryNumber;
         }
     }
-
 }
+
+
