@@ -109,6 +109,7 @@
             input.ForeColor = Color.FromArgb(64, 64, 64);
             input.Name = "input";
             input.ReadOnly = true;
+            input.TextChanged += input_TextChanged;
             // 
             // dot
             // 

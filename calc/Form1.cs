@@ -10,7 +10,7 @@ namespace calc
         public Form1()
         {
             InitializeComponent();
-            сheckTextBoxAsync();
+            StartCheckTextBoxAsync();
         }
 
         private void one_Click(object sender, EventArgs e)
@@ -92,13 +92,13 @@ namespace calc
             string[] decimalNumbers = new string[numbers.Length];
             string decimalSolution = "";
             input.Text = "";
-            for (int i = 0; i < numbers.Length; i++) 
+            for (int i = 0; i < numbers.Length; i++)
             {
                 decimalNumbers[i] = BinaryToDecimal(numbers[i]);
             }
 
             string decimalExpression = rebuildExpression(binaryExpression, decimalNumbers);
-            
+
             decimalExpression = decimalExpression.Replace(',', '.');
             input.Text = decimalExpression;
             DataTable dt = new DataTable();
@@ -107,11 +107,12 @@ namespace calc
                 decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
                 if (decimalSolution == "не число" || decimalSolution == "∞")
                 {
-                    //decimalSolution = "😊";
+                    decimalSolution = "😊";
                     input.Text = decimalSolution;
-                }else 
+                }
+                else
                 {
-                    
+
                     input.Text = decimalToBinary(decimalSolution);
                 }
             }
@@ -122,25 +123,42 @@ namespace calc
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                     );
+                input.Text = "";
             }
-            
+
         }
 
         private async Task сheckTextBoxAsync()
         {
+            string s="";
+            string[] operators = new string[] {
+                    "++", "+-", "+*", "+/",
+                    "--", "-+", "-*", "-/",
+                    "**", "*+", "*-", "*/",
+                    "//", "/+", "/-", "/*"
+            };
             while (true)
             {
-                await Task.Delay(3000);
-                if (false)
+                s = input.Text;
+                
+                foreach (string op in operators)
                 {
-                    //MessageBox.Show("Вы идиот!",
-                    //"Предупреждение",
-                    //MessageBoxButtons.OK,
-                    //MessageBoxIcon.Warning
-                    //);
-                    //input.Text = input.Text.Remove(input.Text.Length - 1);
+                    if (s.Contains(op))
+                    {
+                        MessageBox.Show("Введено два знака!",
+                            "Предупреждение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                            );
+                        input.Text = input.Text.Remove(input.Text.Length - 1);
+                        break;
+                    }
                 }
+                await Task.Delay(100);
             }
+        }
+        private async void StartCheckTextBoxAsync() {
+            await сheckTextBoxAsync();
         }
 
         private void checkClickSolution()
@@ -243,6 +261,11 @@ namespace calc
             binaryExpression = binaryExpression.TrimEnd('_');
             Console.WriteLine($"final expression = {binaryExpression}");
             return binaryExpression;
+        }
+
+        private void input_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
