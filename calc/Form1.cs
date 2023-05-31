@@ -66,7 +66,7 @@ namespace calc
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            if (!isClickSolution)
+            if (!isEmptyTextBox)
             {
                 if (input.Text[^1] == ')')
                 {
@@ -141,7 +141,8 @@ namespace calc
                     input.Text = "";
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Не хватает скобок!",
                         "Предупреждение",
                         MessageBoxButtons.OK,
@@ -179,8 +180,8 @@ namespace calc
             string[] operators = new string[] {
                 "++", "+-", "+*", "+/", "+.",
                 "--", "-+", "-*", "-/", "-.",
-                "**", "*+", "*-", "*/", "*.",
-                "//", "/+", "/-", "/*", "/.",
+                "**", "*/", "*.",
+                "//", "/+",  "/*", "/.",
                 "..", ".+", ".-", ".*", "./"
             };
             foreach (string op in operators)
@@ -201,7 +202,7 @@ namespace calc
         private void CheckFirstSign()
         {
             string str = input.Text;
-            char[] operators = new char[] { '+', '-', '*', '/', '.' };
+            char[] operators = new char[] { '*', '/', '.' };
             if (isEmptyTextBox == false)
             {
                 foreach (char op in operators)
@@ -222,8 +223,9 @@ namespace calc
 
         private void CheckNumberOfBrackets()
         {
-            if (isEmptyTextBox) { 
-                numberOfLeftBrackets = 0;   
+            if (isEmptyTextBox)
+            {
+                numberOfLeftBrackets = 0;
                 numberOfRightBrackets = 0;
             }
             if (numberOfRightBrackets > numberOfLeftBrackets)
@@ -238,13 +240,13 @@ namespace calc
             }
         }
 
-        private void CheckCorrectBrackets() 
+        private void CheckCorrectBrackets()
         {
             string str = input.Text;
-            string[] brackets = new string[] { 
+            string[] brackets = new string[] {
                 "+)", "-)", "*)","/)",
-                "(+", "(-", "(*","(/",
-                ".)",").", ".(", "(.", 
+                 "(*","(/",
+                ".)",").", ".(", "(.",
                 "()",")(", "1(", "0("
             };
             foreach (string bracket in brackets)
@@ -260,7 +262,8 @@ namespace calc
                     {
                         numberOfRightBrackets--;
                     }
-                    else if (input.Text[^1] == '(') {
+                    else if (input.Text[^1] == '(')
+                    {
                         numberOfLeftBrackets--;
                     }
                     input.Text = input.Text.Remove(input.Text.Length - 1);
@@ -301,9 +304,18 @@ namespace calc
             return decimalNumber.ToString();
         }
 
-        private static string DecimalToBinary(string decimaNumber)
+        private static string DecimalToBinary(string decimalNumber)
         {
-            double number = Convert.ToDouble(decimaNumber);
+
+            string sign = "";
+            if (decimalNumber[0] == '-')
+            {
+                sign = "-";
+            }
+            string[] a = decimalNumber.Split('-');
+            a = a.Where(x => x != "").ToArray();
+            decimalNumber = a[0];
+            double number = Convert.ToDouble(decimalNumber);
             int integerPart = (int)number;
             double fractionalPart = number - integerPart;
 
@@ -317,7 +329,7 @@ namespace calc
                 binaryFractionalPart += bit.ToString();
                 fractionalPart -= bit;
             }
-            string binaryNumber = binaryIntegerPart + "." + binaryFractionalPart;
+            string binaryNumber = sign + binaryIntegerPart + "." + binaryFractionalPart;
             return binaryNumber;
         }
 
@@ -362,7 +374,7 @@ namespace calc
             }
             return str;
         }
-        
+
     }
 }
 

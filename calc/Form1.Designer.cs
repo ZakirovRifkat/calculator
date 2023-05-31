@@ -94,10 +94,11 @@
             // 
             // multyply
             // 
+            multyply.BackColor = Color.Transparent;
             resources.ApplyResources(multyply, "multyply");
             multyply.ForeColor = Color.FromArgb(64, 64, 64);
             multyply.Name = "multyply";
-            multyply.UseVisualStyleBackColor = true;
+            multyply.UseVisualStyleBackColor = false;
             multyply.Click += Multyply_Click;
             // 
             // input
