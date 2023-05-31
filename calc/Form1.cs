@@ -78,7 +78,7 @@ namespace calc
                     numberOfLeftBrackets--;
                 }
                 input.Text = input.Text.Remove(input.Text.Length - 1);
-                if (isClickSolution) 
+                if (isClickSolution)
                 {
                     input.Text = "";
                 }

@@ -46,7 +46,7 @@
             // one
             // 
             one.BackColor = Color.FromArgb(237, 237, 237);
-            one.FlatAppearance.BorderColor = Color.Black;
+            one.FlatAppearance.BorderColor = Color.FromArgb(237, 237, 237);
             one.FlatAppearance.BorderSize = 0;
             one.FlatStyle = FlatStyle.Flat;
             one.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -62,6 +62,7 @@
             // zero
             // 
             zero.BackColor = Color.FromArgb(239, 239, 235);
+            zero.FlatAppearance.BorderColor = Color.FromArgb(239, 239, 235);
             zero.FlatAppearance.BorderSize = 0;
             zero.FlatStyle = FlatStyle.Flat;
             zero.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -77,6 +78,7 @@
             // solution
             // 
             solution.BackColor = Color.FromArgb(230, 46, 137);
+            solution.FlatAppearance.BorderColor = Color.FromArgb(230, 46, 137);
             solution.FlatAppearance.BorderSize = 0;
             solution.FlatStyle = FlatStyle.Flat;
             solution.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -92,6 +94,7 @@
             // minus
             // 
             minus.BackColor = Color.FromArgb(137, 78, 217);
+            minus.FlatAppearance.BorderColor = Color.FromArgb(137, 78, 217);
             minus.FlatAppearance.BorderSize = 0;
             minus.FlatStyle = FlatStyle.Flat;
             minus.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -107,6 +110,7 @@
             // division
             // 
             division.BackColor = Color.FromArgb(145, 85, 225);
+            division.FlatAppearance.BorderColor = Color.FromArgb(145, 85, 225);
             division.FlatAppearance.BorderSize = 0;
             division.FlatStyle = FlatStyle.Flat;
             division.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -122,6 +126,7 @@
             // plus
             // 
             plus.BackColor = Color.FromArgb(133, 71, 217);
+            plus.FlatAppearance.BorderColor = Color.FromArgb(133, 71, 217);
             plus.FlatAppearance.BorderSize = 0;
             plus.FlatStyle = FlatStyle.Flat;
             plus.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -138,6 +143,7 @@
             // 
             multyply.BackColor = Color.FromArgb(141, 82, 221);
             multyply.BackgroundImageLayout = ImageLayout.Stretch;
+            multyply.FlatAppearance.BorderColor = Color.FromArgb(141, 82, 221);
             multyply.FlatAppearance.BorderSize = 0;
             multyply.FlatStyle = FlatStyle.Flat;
             multyply.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -171,6 +177,7 @@
             // dot
             // 
             dot.BackColor = Color.FromArgb(241, 241, 241);
+            dot.FlatAppearance.BorderColor = Color.FromArgb(241, 241, 241);
             dot.FlatAppearance.BorderSize = 0;
             dot.FlatStyle = FlatStyle.Flat;
             dot.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -187,6 +194,7 @@
             // allClear
             // 
             allClear.BackColor = Color.FromArgb(235, 234, 235);
+            allClear.FlatAppearance.BorderColor = Color.FromArgb(235, 234, 235);
             allClear.FlatAppearance.BorderSize = 0;
             allClear.FlatStyle = FlatStyle.Flat;
             allClear.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -202,6 +210,7 @@
             // clear
             // 
             clear.BackColor = Color.FromArgb(234, 232, 232);
+            clear.FlatAppearance.BorderColor = Color.FromArgb(234, 232, 232);
             clear.FlatAppearance.BorderSize = 0;
             clear.FlatStyle = FlatStyle.Flat;
             clear.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -217,6 +226,7 @@
             // rightBracket
             // 
             rightBracket.BackColor = Color.FromArgb(237, 237, 234);
+            rightBracket.FlatAppearance.BorderColor = Color.FromArgb(237, 237, 234);
             rightBracket.FlatAppearance.BorderSize = 0;
             rightBracket.FlatStyle = FlatStyle.Flat;
             rightBracket.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -232,6 +242,7 @@
             // leftBracket
             // 
             leftBracket.BackColor = Color.FromArgb(237, 237, 237);
+            leftBracket.FlatAppearance.BorderColor = Color.FromArgb(237, 237, 237);
             leftBracket.FlatAppearance.BorderSize = 0;
             leftBracket.FlatStyle = FlatStyle.Flat;
             leftBracket.Font = new Font("Source Code Pro Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
