@@ -122,14 +122,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="one.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 328</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="one.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>12, 246</value>
   </data>
   <data name="one.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="one.TabIndex" type="System.Int32, mscorlib">
@@ -154,13 +150,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="zero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 328</value>
-  </data>
-  <data name="zero.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>93, 246</value>
   </data>
   <data name="zero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="zero.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -184,13 +177,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="solution.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 328</value>
-  </data>
-  <data name="solution.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>255, 246</value>
   </data>
   <data name="solution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="solution.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -214,13 +204,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="minus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 224</value>
-  </data>
-  <data name="minus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>93, 168</value>
   </data>
   <data name="minus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="minus.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -244,13 +231,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="division.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 224</value>
-  </data>
-  <data name="division.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>255, 168</value>
   </data>
   <data name="division.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="division.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -274,13 +258,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="plus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 224</value>
-  </data>
-  <data name="plus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>12, 168</value>
   </data>
   <data name="plus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="plus.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -304,13 +285,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="multyply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 224</value>
-  </data>
-  <data name="multyply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>174, 168</value>
   </data>
   <data name="multyply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="multyply.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -338,16 +316,13 @@
     <value>NoControl</value>
   </data>
   <data name="input.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 16</value>
-  </data>
-  <data name="input.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>12, 12</value>
   </data>
   <data name="input.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="input.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 83</value>
+    <value>318, 68</value>
   </data>
   <data name="input.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -377,13 +352,10 @@
     <value>NoControl</value>
   </data>
   <data name="dot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 328</value>
-  </data>
-  <data name="dot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>174, 246</value>
   </data>
   <data name="dot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="dot.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -407,13 +379,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="allClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 120</value>
-  </data>
-  <data name="allClear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>12, 90</value>
   </data>
   <data name="allClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="allClear.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -437,13 +406,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="clear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 120</value>
-  </data>
-  <data name="clear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>93, 90</value>
   </data>
   <data name="clear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="clear.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -467,13 +433,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="rightBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 120</value>
-  </data>
-  <data name="rightBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>255, 90</value>
   </data>
   <data name="rightBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="rightBracket.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -497,13 +460,10 @@
     <value>Source Code Pro Semibold, 20.25pt, style=Bold</value>
   </data>
   <data name="leftBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 120</value>
-  </data>
-  <data name="leftBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>174, 90</value>
   </data>
   <data name="leftBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 96</value>
+    <value>75, 72</value>
   </data>
   <data name="leftBracket.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -530,16 +490,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 20</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>397, 429</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>347, 322</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 476</value>
+    <value>365, 367</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>WindowsDefaultBounds</value>

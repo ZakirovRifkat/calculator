@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Runtime.CompilerServices;
 
@@ -6,6 +7,9 @@ namespace calc
     public partial class Form1 : Form
     {
         bool isClickSolution = false;
+        bool isEmptyTextBox = true;
+        int numberOfLeftBrackets;
+        int numberOfRightBrackets;
 
         public Form1()
         {
@@ -64,6 +68,14 @@ namespace calc
         {
             if (!isClickSolution)
             {
+                if (input.Text[input.Text.Length - 1] == ')')
+                {
+                    numberOfRightBrackets--;
+                }
+                else if (input.Text[input.Text.Length - 1] == '(')
+                {
+                    numberOfLeftBrackets--;
+                }
                 input.Text = input.Text.Remove(input.Text.Length - 1);
             }
             else
@@ -74,79 +86,129 @@ namespace calc
 
         private void LeftBracket_Click(object sender, EventArgs e)
         {
+            CheckClickSolution();
+            numberOfLeftBrackets++;
             input.Text += "(";
         }
 
         private void RightBracket_Click(object sender, EventArgs e)
         {
+            CheckClickSolution();
+            numberOfRightBrackets++;
             input.Text += ")";
         }
 
         private void Solution_Click(object sender, EventArgs e)
         {
-            isClickSolution = true;
-            string binaryExpression = input.Text;
-            char[] symbols = { '+', '-', '*', '/', '(', ')' };
-            string[] numbers = binaryExpression.Split(symbols);
-            numbers = numbers.Where(x => x != "").ToArray();
-            string[] decimalNumbers = new string[numbers.Length];
-            string decimalSolution = "";
-            input.Text = "";
-            for (int i = 0; i < numbers.Length; i++)
+            if (numberOfLeftBrackets == numberOfRightBrackets)
             {
-                decimalNumbers[i] = BinaryToDecimal(numbers[i]);
-            }
+                isClickSolution = true;
+                string binaryExpression = input.Text;
+                char[] symbols = { '+', '-', '*', '/', '(', ')' };
+                string[] numbers = binaryExpression.Split(symbols);
+                numbers = numbers.Where(x => x != "").ToArray();
+                string[] decimalNumbers = new string[numbers.Length];
 
-            string decimalExpression = RebuildExpression(binaryExpression, decimalNumbers);
-
-            decimalExpression = decimalExpression.Replace(',', '.');
-            input.Text = decimalExpression;
-            DataTable dt = new DataTable();
-            try
-            {
-                decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
-                if (decimalSolution == "не число" || decimalSolution == "∞")
+                for (int i = 0; i < numbers.Length; i++)
                 {
-                    decimalSolution = "😊";
-                    input.Text = decimalSolution;
+                    decimalNumbers[i] = BinaryToDecimal(numbers[i]);
                 }
-                else
-                {
 
-                    input.Text = DecimalToBinary(decimalSolution);
+                string decimalExpression = RebuildExpression(binaryExpression, decimalNumbers);
+                decimalExpression = decimalExpression.Replace(',', '.');
+
+                DataTable dt = new DataTable();
+                try
+                {
+                    string decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
+                    if (decimalSolution == "не число" || decimalSolution == "∞")
+                    {
+                        decimalSolution = "∞";
+                        input.Text = decimalSolution;
+                    }
+                    else
+                    {
+                        input.Text = DecimalToBinary(decimalSolution);
+                    }
+                }
+                catch (Exception exeption)
+                {
+                    MessageBox.Show(exeption.Message,
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                        );
+                    input.Text = "";
                 }
             }
-            catch (Exception exeption)
-            {
-                MessageBox.Show(exeption.Message,
-                    "Предупреждение",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                    );
-                input.Text = "";
+            else {
+                MessageBox.Show("Не хватает скобок!",
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                        );
             }
 
         }
 
+        private void Input_TextChanged(object sender, EventArgs e)
+        {
+            isEmptyTextBox = input.Text == "";
+        }
+
+        private async void StartCheckTextBoxAsync()
+        {
+            await CheckTextBoxAsync();
+        }
+
         private async Task CheckTextBoxAsync()
         {
-            string s="";
-            string[] operators = new string[] {
-                    "++", "+-", "+*", "+/", "+.",
-                    "--", "-+", "-*", "-/", "-.",
-                    "**", "*+", "*-", "*/", "*.",
-                    "//", "/+", "/-", "/*", "/.",
-                    "..", ".+", ".-", ".*", "./"
-            };
             while (true)
             {
-                s = input.Text;
-                
-                foreach (string op in operators)
+                CheckDoubleSign();
+                CheckFirstSign();
+                CheckNumberOfBrackets();
+                CheckCorrectBrackets();
+                await Task.Delay(100);
+            }
+        }
+
+        private void CheckDoubleSign()
+        {
+            string str = input.Text;
+            string[] operators = new string[] {
+                "++", "+-", "+*", "+/", "+.",
+                "--", "-+", "-*", "-/", "-.",
+                "**", "*+", "*-", "*/", "*.",
+                "//", "/+", "/-", "/*", "/.",
+                "..", ".+", ".-", ".*", "./"
+            };
+            foreach (string op in operators)
+            {
+                if (str.Contains(op))
                 {
-                    if (s.Contains(op))
+                    MessageBox.Show("Введено два знака!",
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                        );
+                    input.Text = input.Text.Remove(input.Text.Length - 1);
+                    break;
+                }
+            }
+        }
+
+        private void CheckFirstSign()
+        {
+            string str = input.Text;
+            char[] operators = new char[] { '+', '-', '*', '/', '.', ')' };
+            if (isEmptyTextBox == false)
+            {
+                foreach (char op in operators)
+                {
+                    if (str[0] == op)
                     {
-                        MessageBox.Show("Введено два знака!",
+                        MessageBox.Show("Некорректный ввод первого знака!",
                             "Предупреждение",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
@@ -155,11 +217,55 @@ namespace calc
                         break;
                     }
                 }
-                await Task.Delay(100);
             }
         }
-        private async void StartCheckTextBoxAsync() {
-            await CheckTextBoxAsync();
+
+        private void CheckNumberOfBrackets()
+        {
+            if (isEmptyTextBox) { 
+                numberOfLeftBrackets = 0;   
+                numberOfRightBrackets = 0;
+            }
+            if (numberOfRightBrackets > numberOfLeftBrackets)
+            {
+                MessageBox.Show("Проблема со скобками!",
+                            "Предупреждение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                            );
+                input.Text = input.Text.Remove(input.Text.Length - 1);
+                numberOfRightBrackets--;
+            }
+        }
+        private void CheckCorrectBrackets() 
+        {
+            string str = input.Text;
+            string[] brackets = new string[] { 
+                "+)", "-)", "*)","/)",
+                "(+", "(-", "(*","(/",
+                ".)",").", ".(", "(.", 
+                "()",")(", "1(", "0("
+            };
+            foreach (string bracket in brackets)
+            {
+                if (str.Contains(bracket))
+                {
+                    MessageBox.Show("Проблема со скобками!",
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                        );
+                    if (input.Text[input.Text.Length - 1] == ')')
+                    {
+                        numberOfRightBrackets--;
+                    }
+                    else if (input.Text[input.Text.Length - 1] == '(') {
+                        numberOfLeftBrackets--;
+                    }
+                    input.Text = input.Text.Remove(input.Text.Length - 1);
+                    break;
+                }
+            }
         }
 
         private void CheckClickSolution()
@@ -171,24 +277,17 @@ namespace calc
             }
         }
 
-        private string BinaryToDecimal(string binaryNumber)
+        private static string BinaryToDecimal(string binaryNumber)
         {
-            // разбиваем число на целую и дробную части
             string[] parts = binaryNumber.Split('.');
-
             string integerPart = parts[0];
-            string fractionalPart = "";
             double decimalFractionalPart = 0;
-            // переводим целую часть из двоичной системы в десятичную
-            int decimalIntegerPart = Convert.ToInt32(integerPart, 2);
-            Console.WriteLine(parts[0]);
 
+            int decimalIntegerPart = Convert.ToInt32(integerPart, 2);
 
             if (parts.Length == 2)
             {
-                Console.WriteLine(parts[1]);
-                fractionalPart = parts[1];
-                // переводим дробную часть из двоичной системы в десятичную
+                string fractionalPart = parts[1];
                 double currentPower = -1;
                 foreach (char c in fractionalPart)
                 {
@@ -197,12 +296,11 @@ namespace calc
                     currentPower--;
                 }
             }
-            // складываем целую и дробную части для получения итогового значения в десятичной системе счисления
             double decimalNumber = decimalIntegerPart + decimalFractionalPart;
             return decimalNumber.ToString();
         }
 
-        private string DecimalToBinary(string decimaNumber)
+        private static string DecimalToBinary(string decimaNumber)
         {
             double number = Convert.ToDouble(decimaNumber);
             int integerPart = (int)number;
@@ -224,20 +322,14 @@ namespace calc
 
         public static string RebuildExpression(string binaryExpression, string[] decimalNumbers)
         {
-            Console.WriteLine(binaryExpression);
-            string decimalExpression = binaryExpression;
-            binaryExpression = binaryExpression + '_';
-            int k = 0;
-            int startIndex = 0;
-            int endIndex = 0;
-            int j = 0;
+            binaryExpression += '_';
+            int indexOfNumber = 0;
             for (int i = 0; i < binaryExpression.Length;)
             {
                 if (binaryExpression[i] == '1' || binaryExpression[i] == '0')
                 {
-                    k = 0;
-                    startIndex = i;
-                    Console.WriteLine($"start index = {startIndex}");
+                    int k = 0;
+                    int startIndex = i;
                     while (
                         binaryExpression[startIndex + k] == '0' ||
                         binaryExpression[startIndex + k] == '1' ||
@@ -246,28 +338,18 @@ namespace calc
                     {
                         k++;
                     }
-                    endIndex = startIndex + k;
-                    Console.WriteLine($"end index = {endIndex}");
-                    binaryExpression = binaryExpression.Substring(0, startIndex) + decimalNumbers[j] + binaryExpression.Substring(endIndex);
-                    i = i + decimalNumbers[j].Length - 1;
-                    j++;
-                    Console.WriteLine($"expression = {binaryExpression}");
-
-
+                    int endIndex = startIndex + k;
+                    binaryExpression = binaryExpression.Substring(0, startIndex) + decimalNumbers[indexOfNumber] + binaryExpression.Substring(endIndex);
+                    i = i + decimalNumbers[indexOfNumber].Length - 1;
+                    indexOfNumber++;
                 }
                 i++;
-                Console.WriteLine("i in end = {0}", i);
-                Console.WriteLine("");
             }
             binaryExpression = binaryExpression.TrimEnd('_');
-            Console.WriteLine($"final expression = {binaryExpression}");
             return binaryExpression;
         }
 
-        private void Input_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
 
