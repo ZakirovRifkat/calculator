@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace calc
@@ -14,8 +15,7 @@ namespace calc
         public Form1()
         {
             InitializeComponent();
-            StartCheckTextBoxAsync();
-            input.Padding = new System.Windows.Forms.Padding(40, 40, 40, 40);
+            //StartCheckTextBoxAsync();
         }
 
         private void One_Click(object sender, EventArgs e)
@@ -160,23 +160,11 @@ namespace calc
         private void Input_TextChanged(object sender, EventArgs e)
         {
             isEmptyTextBox = input.Text == "";
-        }
-
-        private async void StartCheckTextBoxAsync()
-        {
-            await CheckTextBoxAsync();
-        }
-
-        private async Task CheckTextBoxAsync()
-        {
-            while (true)
-            {
-                CheckDoubleSign();
-                CheckFirstSign();
-                CheckNumberOfBrackets();
-                CheckCorrectBrackets();
-                await Task.Delay(100);
-            }
+            CheckDoubleSign();
+            CheckFirstSign();
+            CheckNumberOfBrackets();
+            CheckCorrectBrackets();
+            CheckDoubleDots();
         }
 
         private void CheckDoubleSign()
@@ -285,6 +273,29 @@ namespace calc
                 input.Text = "";
             }
         }
+
+        private void CheckDoubleDots()
+        {
+            string str = input.Text;
+            char[] symbols = { '+', '-', '*', '/', '(', ')' };
+            string[] numbers = str.Split(symbols);
+            numbers = numbers.Where(x => x != "").ToArray();
+            foreach(string number in numbers) 
+            {
+                int countDots = number.Count(c => c == '.');
+                if (countDots > 1) 
+                {
+                    MessageBox.Show("Две точки в числе!",
+                            "Предупреждение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                            );
+                    input.Text = str.Remove(str.Length - 1);
+                    break;
+                }
+            }
+        }
+
 
         private static string BinaryToDecimal(string binaryNumber)
         {
