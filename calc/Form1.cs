@@ -237,6 +237,7 @@ namespace calc
                 numberOfRightBrackets--;
             }
         }
+
         private void CheckCorrectBrackets() 
         {
             string str = input.Text;
@@ -349,6 +350,18 @@ namespace calc
             return binaryExpression;
         }
 
+        private string RemoveExtraZeros(string str) 
+        {
+            while (str[str.Length - 1] == '0')
+            {
+                str = str.Remove(str.Length - 1);
+            }
+            if (str[str.Length - 1] == '.')
+            {
+                str = str.Remove(str.Length - 1);
+            }
+            return str;
+        }
         
     }
 }
