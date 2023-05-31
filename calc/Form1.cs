@@ -68,11 +68,11 @@ namespace calc
         {
             if (!isClickSolution)
             {
-                if (input.Text[input.Text.Length - 1] == ')')
+                if (input.Text[^1] == ')')
                 {
                     numberOfRightBrackets--;
                 }
-                else if (input.Text[input.Text.Length - 1] == '(')
+                else if (input.Text[^1] == '(')
                 {
                     numberOfLeftBrackets--;
                 }
@@ -128,7 +128,7 @@ namespace calc
                     }
                     else
                     {
-                        input.Text = DecimalToBinary(decimalSolution);
+                        input.Text = RemoveExtraZeros(DecimalToBinary(decimalSolution));
                     }
                 }
                 catch (Exception exeption)
@@ -201,7 +201,7 @@ namespace calc
         private void CheckFirstSign()
         {
             string str = input.Text;
-            char[] operators = new char[] { '+', '-', '*', '/', '.', ')' };
+            char[] operators = new char[] { '+', '-', '*', '/', '.' };
             if (isEmptyTextBox == false)
             {
                 foreach (char op in operators)
@@ -256,11 +256,11 @@ namespace calc
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
                         );
-                    if (input.Text[input.Text.Length - 1] == ')')
+                    if (input.Text[^1] == ')')
                     {
                         numberOfRightBrackets--;
                     }
-                    else if (input.Text[input.Text.Length - 1] == '(') {
+                    else if (input.Text[^1] == '(') {
                         numberOfLeftBrackets--;
                     }
                     input.Text = input.Text.Remove(input.Text.Length - 1);
@@ -340,7 +340,7 @@ namespace calc
                         k++;
                     }
                     int endIndex = startIndex + k;
-                    binaryExpression = binaryExpression.Substring(0, startIndex) + decimalNumbers[indexOfNumber] + binaryExpression.Substring(endIndex);
+                    binaryExpression = binaryExpression[..startIndex] + decimalNumbers[indexOfNumber] + binaryExpression[endIndex..];
                     i = i + decimalNumbers[indexOfNumber].Length - 1;
                     indexOfNumber++;
                 }
@@ -350,13 +350,13 @@ namespace calc
             return binaryExpression;
         }
 
-        private string RemoveExtraZeros(string str) 
+        private static string RemoveExtraZeros(string str)
         {
-            while (str[str.Length - 1] == '0')
+            while (str[^1] == '0')
             {
                 str = str.Remove(str.Length - 1);
             }
-            if (str[str.Length - 1] == '.')
+            if (str[^1] == '.')
             {
                 str = str.Remove(str.Length - 1);
             }
