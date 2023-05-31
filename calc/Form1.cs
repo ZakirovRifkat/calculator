@@ -15,6 +15,7 @@ namespace calc
         {
             InitializeComponent();
             StartCheckTextBoxAsync();
+            input.Padding = new System.Windows.Forms.Padding(40, 40, 40, 40);
         }
 
         private void One_Click(object sender, EventArgs e)
@@ -77,6 +78,10 @@ namespace calc
                     numberOfLeftBrackets--;
                 }
                 input.Text = input.Text.Remove(input.Text.Length - 1);
+                if (isClickSolution) 
+                {
+                    input.Text = "";
+                }
             }
             else
             {
