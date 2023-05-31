@@ -13,54 +13,54 @@ namespace calc
             StartCheckTextBoxAsync();
         }
 
-        private void one_Click(object sender, EventArgs e)
+        private void One_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "1";
         }
 
-        private void zero_Click(object sender, EventArgs e)
+        private void Zero_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "0";
         }
 
-        private void dot_Click(object sender, EventArgs e)
+        private void Dot_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += ".";
         }
 
-        private void plus_Click(object sender, EventArgs e)
+        private void Plus_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "+";
         }
 
-        private void minus_Click(object sender, EventArgs e)
+        private void Minus_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "-";
         }
 
-        private void multyply_Click(object sender, EventArgs e)
+        private void Multyply_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "*";
         }
 
-        private void division_Click(object sender, EventArgs e)
+        private void Division_Click(object sender, EventArgs e)
         {
-            checkClickSolution();
+            CheckClickSolution();
             input.Text += "/";
         }
 
-        private void allClear_Click(object sender, EventArgs e)
+        private void AllClear_Click(object sender, EventArgs e)
         {
             input.Text = "";
         }
 
-        private void clear_Click(object sender, EventArgs e)
+        private void Clear_Click(object sender, EventArgs e)
         {
             if (!isClickSolution)
             {
@@ -72,17 +72,17 @@ namespace calc
             }
         }
 
-        private void leftBracket_Click(object sender, EventArgs e)
+        private void LeftBracket_Click(object sender, EventArgs e)
         {
             input.Text += "(";
         }
 
-        private void rightBracket_Click(object sender, EventArgs e)
+        private void RightBracket_Click(object sender, EventArgs e)
         {
             input.Text += ")";
         }
 
-        private void solution_Click(object sender, EventArgs e)
+        private void Solution_Click(object sender, EventArgs e)
         {
             isClickSolution = true;
             string binaryExpression = input.Text;
@@ -97,7 +97,7 @@ namespace calc
                 decimalNumbers[i] = BinaryToDecimal(numbers[i]);
             }
 
-            string decimalExpression = rebuildExpression(binaryExpression, decimalNumbers);
+            string decimalExpression = RebuildExpression(binaryExpression, decimalNumbers);
 
             decimalExpression = decimalExpression.Replace(',', '.');
             input.Text = decimalExpression;
@@ -113,7 +113,7 @@ namespace calc
                 else
                 {
 
-                    input.Text = decimalToBinary(decimalSolution);
+                    input.Text = DecimalToBinary(decimalSolution);
                 }
             }
             catch (Exception exeption)
@@ -128,14 +128,15 @@ namespace calc
 
         }
 
-        private async Task сheckTextBoxAsync()
+        private async Task CheckTextBoxAsync()
         {
             string s="";
             string[] operators = new string[] {
-                    "++", "+-", "+*", "+/",
-                    "--", "-+", "-*", "-/",
-                    "**", "*+", "*-", "*/",
-                    "//", "/+", "/-", "/*"
+                    "++", "+-", "+*", "+/", "+.",
+                    "--", "-+", "-*", "-/", "-.",
+                    "**", "*+", "*-", "*/", "*.",
+                    "//", "/+", "/-", "/*", "/.",
+                    "..", ".+", ".-", ".*", "./"
             };
             while (true)
             {
@@ -158,10 +159,10 @@ namespace calc
             }
         }
         private async void StartCheckTextBoxAsync() {
-            await сheckTextBoxAsync();
+            await CheckTextBoxAsync();
         }
 
-        private void checkClickSolution()
+        private void CheckClickSolution()
         {
             if (isClickSolution == true)
             {
@@ -201,7 +202,7 @@ namespace calc
             return decimalNumber.ToString();
         }
 
-        private string decimalToBinary(string decimaNumber)
+        private string DecimalToBinary(string decimaNumber)
         {
             double number = Convert.ToDouble(decimaNumber);
             int integerPart = (int)number;
@@ -221,7 +222,7 @@ namespace calc
             return binaryNumber;
         }
 
-        public static string rebuildExpression(string binaryExpression, string[] decimalNumbers)
+        public static string RebuildExpression(string binaryExpression, string[] decimalNumbers)
         {
             Console.WriteLine(binaryExpression);
             string decimalExpression = binaryExpression;
@@ -263,7 +264,7 @@ namespace calc
             return binaryExpression;
         }
 
-        private void input_TextChanged(object sender, EventArgs e)
+        private void Input_TextChanged(object sender, EventArgs e)
         {
 
         }

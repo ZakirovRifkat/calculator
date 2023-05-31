@@ -50,7 +50,7 @@
             one.ForeColor = Color.FromArgb(64, 64, 64);
             one.Name = "one";
             one.UseVisualStyleBackColor = true;
-            one.Click += one_Click;
+            one.Click += One_Click;
             // 
             // zero
             // 
@@ -58,7 +58,7 @@
             zero.ForeColor = Color.FromArgb(64, 64, 64);
             zero.Name = "zero";
             zero.UseVisualStyleBackColor = true;
-            zero.Click += zero_Click;
+            zero.Click += Zero_Click;
             // 
             // solution
             // 
@@ -66,7 +66,7 @@
             solution.ForeColor = Color.FromArgb(64, 64, 64);
             solution.Name = "solution";
             solution.UseVisualStyleBackColor = true;
-            solution.Click += solution_Click;
+            solution.Click += Solution_Click;
             // 
             // minus
             // 
@@ -74,7 +74,7 @@
             minus.ForeColor = Color.FromArgb(64, 64, 64);
             minus.Name = "minus";
             minus.UseVisualStyleBackColor = true;
-            minus.Click += minus_Click;
+            minus.Click += Minus_Click;
             // 
             // division
             // 
@@ -82,7 +82,7 @@
             division.ForeColor = Color.FromArgb(64, 64, 64);
             division.Name = "division";
             division.UseVisualStyleBackColor = true;
-            division.Click += division_Click;
+            division.Click += Division_Click;
             // 
             // plus
             // 
@@ -90,7 +90,7 @@
             plus.ForeColor = Color.FromArgb(64, 64, 64);
             plus.Name = "plus";
             plus.UseVisualStyleBackColor = true;
-            plus.Click += plus_Click;
+            plus.Click += Plus_Click;
             // 
             // multyply
             // 
@@ -98,7 +98,7 @@
             multyply.ForeColor = Color.FromArgb(64, 64, 64);
             multyply.Name = "multyply";
             multyply.UseVisualStyleBackColor = true;
-            multyply.Click += multyply_Click;
+            multyply.Click += Multyply_Click;
             // 
             // input
             // 
@@ -109,7 +109,7 @@
             input.ForeColor = Color.FromArgb(64, 64, 64);
             input.Name = "input";
             input.ReadOnly = true;
-            input.TextChanged += input_TextChanged;
+            input.TextChanged += Input_TextChanged;
             // 
             // dot
             // 
@@ -117,7 +117,7 @@
             dot.ForeColor = Color.FromArgb(64, 64, 64);
             dot.Name = "dot";
             dot.UseVisualStyleBackColor = true;
-            dot.Click += dot_Click;
+            dot.Click += Dot_Click;
             // 
             // allClear
             // 
@@ -125,7 +125,7 @@
             allClear.ForeColor = Color.FromArgb(64, 64, 64);
             allClear.Name = "allClear";
             allClear.UseVisualStyleBackColor = true;
-            allClear.Click += allClear_Click;
+            allClear.Click += AllClear_Click;
             // 
             // clear
             // 
@@ -133,7 +133,7 @@
             clear.ForeColor = Color.FromArgb(64, 64, 64);
             clear.Name = "clear";
             clear.UseVisualStyleBackColor = true;
-            clear.Click += clear_Click;
+            clear.Click += Clear_Click;
             // 
             // rightBracket
             // 
@@ -141,7 +141,7 @@
             rightBracket.ForeColor = Color.FromArgb(64, 64, 64);
             rightBracket.Name = "rightBracket";
             rightBracket.UseVisualStyleBackColor = true;
-            rightBracket.Click += rightBracket_Click;
+            rightBracket.Click += RightBracket_Click;
             // 
             // leftBracket
             // 
@@ -149,7 +149,7 @@
             leftBracket.ForeColor = Color.FromArgb(64, 64, 64);
             leftBracket.Name = "leftBracket";
             leftBracket.UseVisualStyleBackColor = true;
-            leftBracket.Click += leftBracket_Click;
+            leftBracket.Click += LeftBracket_Click;
             // 
             // Form1
             // 
