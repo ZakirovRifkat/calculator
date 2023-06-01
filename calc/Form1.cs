@@ -51,6 +51,7 @@ namespace calc
         private void Multyply_Click(object sender, EventArgs e)
         {
             CheckClickSolution();
+            
             input.Text += "*";
         }
 
@@ -109,41 +110,48 @@ namespace calc
             {
                 isClickSolution = true;
                 string binaryExpression = input.Text;
-                char[] symbols = { '+', '-', '*', '/', '(', ')' };
-                string[] numbers = binaryExpression.Split(symbols);
-                numbers = numbers.Where(x => x != "").ToArray();
-                string[] decimalNumbers = new string[numbers.Length];
-
-                for (int i = 0; i < numbers.Length; i++)
+                if (!isEmptyTextBox)
                 {
-                    decimalNumbers[i] = BinaryToDecimal(numbers[i]);
-                }
+                    char[] symbols = { '+', '-', '*', '/', '(', ')' };
+                    string[] numbers = binaryExpression.Split(symbols);
+                    numbers = numbers.Where(x => x != "").ToArray();
+                    string[] decimalNumbers = new string[numbers.Length];
 
-                string decimalExpression = RebuildExpression(binaryExpression, decimalNumbers);
-                decimalExpression = decimalExpression.Replace(',', '.');
-
-                DataTable dt = new DataTable();
-                try
-                {
-                    string decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
-                    if (decimalSolution == "не число" || decimalSolution == "∞")
+                    for (int i = 0; i < numbers.Length; i++)
                     {
-                        decimalSolution = "∞";
-                        input.Text = decimalSolution;
+                        decimalNumbers[i] = BinaryToDecimal(numbers[i]);
                     }
-                    else
+
+                    string decimalExpression = RebuildExpression(binaryExpression, decimalNumbers);
+                    decimalExpression = decimalExpression.Replace(',', '.');
+
+                    DataTable dt = new DataTable();
+                    try
                     {
-                        input.Text = RemoveExtraZeros(DecimalToBinary(decimalSolution));
+                        string decimalSolution = Convert.ToString(dt.Compute(decimalExpression, ""));
+                        if (decimalSolution == "не число" || decimalSolution == "∞")
+                        {
+                            decimalSolution = "∞";
+                            input.Text = decimalSolution;
+                        }
+                        else
+                        {
+                            input.Text = RemoveExtraZeros(DecimalToBinary(decimalSolution));
+                        }
+                    }
+                    catch (Exception exeption)
+                    {
+                        MessageBox.Show(exeption.Message,
+                            "Предупреждение",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                            );
+                        input.Text = "";
                     }
                 }
-                catch (Exception exeption)
+                else 
                 {
-                    MessageBox.Show(exeption.Message,
-                        "Предупреждение",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                        );
-                    input.Text = "";
+                    input.Text = "0";
                 }
             }
             else
@@ -228,8 +236,8 @@ namespace calc
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning
                             );
+                numberOfRightBrackets = numberOfRightBrackets -1;
                 input.Text = input.Text.Remove(input.Text.Length - 1);
-                numberOfRightBrackets--;
             }
         }
 
@@ -263,6 +271,15 @@ namespace calc
                     break;
                 }
             }
+            if (str.Contains(")1") || str.Contains(")0"))
+            {
+                MessageBox.Show("Проблема со скобками!",
+                        "Предупреждение",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                        );
+                input.Text = input.Text.Remove(input.Text.Length - 1);
+            }
         }
 
         private void CheckClickSolution()
@@ -280,10 +297,10 @@ namespace calc
             char[] symbols = { '+', '-', '*', '/', '(', ')' };
             string[] numbers = str.Split(symbols);
             numbers = numbers.Where(x => x != "").ToArray();
-            foreach(string number in numbers) 
+            foreach (string number in numbers)
             {
                 int countDots = number.Count(c => c == '.');
-                if (countDots > 1) 
+                if (countDots > 1)
                 {
                     MessageBox.Show("Две точки в числе!",
                             "Предупреждение",
@@ -295,7 +312,6 @@ namespace calc
                 }
             }
         }
-
 
         private static string BinaryToDecimal(string binaryNumber)
         {
